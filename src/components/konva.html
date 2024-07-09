@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://unpkg.com/konva@9.3.13/konva.min.js"></script>
+  <meta charset="utf-8" />
+  <title>Konva Canvas Stage Preview Demo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #f0f0f0;
+    }
+
+    #preview {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      border: 1px solid grey;
+      background-color: lightgrey;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <img id="preview" />
+  <script>
+    // import { useSelector } from 'react-redux';
+    // const idCardsData = useSelector((state) => state.dashboard.idCards)
+    // console.log(idCardsData)
+
+
+    const data = [
+      {
+        name: "maruf",
+        image: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+        stdid: "2345346",
+        version: "english",
+        class: "1",
+        roll: "123",
+        year: "2023",
+        phone: "098765456"
+      },
+      {
+        name: "apon",
+        image: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FS7B9z_1719903303734.jpg?alt=media&token=c46bd625-a746-40ee-858f-661817081d1d",
+        stdid: "2345346",
+        version: "bangla",
+        class: "1",
+        roll: "123",
+        year: "2023",
+        phone: "098765456"
+      },
+      {
+        name: "udayan",
+        image: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FbOQh2_1681644322130.jpg?alt=media&token=bf5a5552-640b-4679-8369-b363f639fde9",
+        stdid: "2345346",
+        version: "french",
+        class: "1",
+        roll: "123",
+        year: "2023",
+        phone: "098765456"
+      },
+    ]
+
+    const stage = new Konva.Stage({
+      container: 'container',
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+
+    const layer = new Konva.Layer({stroke:'red',strokeWidth:4});
+    var rect1 = new Konva.Group({
+      x: 20,
+      y: 20,
+      width: 400,
+      height: 50,
+      fill: 'green',
+      // stroke: 'black',
+      // strokeWidth: 4,
+      // draggable:true
+    });
+
+    rect1.add(new Konva.Rect({
+        width: 50,
+        height: 25,
+        fill: 'lightblue',
+        draggable:true
+    }));
+
+    layer.add(rect1)
+
+    var rect2 = new Konva.Rect({
+      x: 150,
+      y: 40,
+      width: 100,
+      height: 50,
+      fill: 'red',
+      shadowBlur: 10,
+      cornerRadius: 10,
+      draggable:true
+    });
+    layer.add(rect2);
+    var rect3 = new Konva.Rect({
+        x: 50,
+        y: 120,
+        width: 100,
+        height: 100,
+        fill: 'blue',
+        cornerRadius: [0, 10, 20, 30],
+        draggable:true
+      });
+      layer.add(rect3);
+
+
+    stage.add(layer);
+
+
+
+
+  </script>
+</body>
+
+</html>
