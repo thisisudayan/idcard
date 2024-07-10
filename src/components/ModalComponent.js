@@ -5,13 +5,20 @@ import { Box, Card, CardMedia, Modal, Button, Grid, } from '@mui/material'
 import UploadButton from './UploadButton';
 import Dropdown from './Dropdown';
 import idCardImage from '../Assets/images/imagecard.png'
+import getIdCardImages from './konva';
 
 const ModalComponent = () => {
 
     const toggleModalStatus = useSelector((state) => state.dashboard.modalStatus)
     const idCardsData = useSelector((state)=>state.dashboard.idCards)
+    const base64Images = useSelector((state)=>state.dashboard.idCardImage)
 
     const dispatch = useDispatch()
+
+    const DownloadPng = async()=>{
+        const xyz = await getIdCardImages(idCardsData)
+        console.log(xyz)
+    }
 
     const styles = {
         position: 'absolute',
@@ -53,7 +60,7 @@ const ModalComponent = () => {
                                 <UploadButton />
                                 <Dropdown options={['PDF', 'PNG']} />
                                 <Dropdown options={['A4', 'A3', 'A2', 'A1']} />
-                                <Button disabled={!idCardsData.length} sx={{ width: '100%' }} variant="contained">Download</Button>
+                                <Button onClick={()=>DownloadPng()} disabled={!idCardsData.length} sx={{ width: '100%' }} variant="contained">Download</Button>
                             </Box>
                         </Grid>
                     </Grid>

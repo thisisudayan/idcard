@@ -12,7 +12,7 @@ import Konvatest from './components/konva';
 function App() {
   const idCards = useSelector((state)=>state.dashboard.idCards)
   const dispatch = useDispatch()
-  console.log(idCards)
+  // console.log(idCards)
 
   return (
     <Box>
@@ -32,7 +32,7 @@ function App() {
           </CardActions>
         </Card>
       </Box>
-      <Konvatest/>
+      {/* <Konvatest/> */}
       <ModalComponent />
     </Box>
   );

@@ -1,209 +1,242 @@
-import React, { useRef, useState } from 'react'
-import { Stage, Layer, Rect, Text, Image, Circle, Line } from 'react-konva';
 import Konva from 'konva';
-import useImage from 'use-image';
-import cardImage from '../Assets/images/imagecard.png'
 import jsPDF from 'jspdf';
-import { height, width } from '@mui/system';
-import { useSelector } from 'react-redux';
-import { Button } from '@mui/material';
-const Konvatest = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { SetIdCardImages } from '../features/dashboard/dashboardSlice';
 
-    const idCardsData = useSelector((state)=>state.dashboard.idCards)
-    console.log(idCardsData)
-    const pageSizes = {
-        a1:{
-            width:3177.6,
-            height:2246.39
-        },
-        a2:{
-            width:2246.39,
-            height:1584
-        },
-        a3:{
-            width:1584,
-            height:1123.19
-        },
-        a4:{
-            width:1123.19,
-            height:796.8
-        }
-    }
+const getIdCardImages = async (data) => {
+    console.log(data)
 
-
-    const stageRef = useRef();
-    console.log(stageRef)
-
-    const handleExport = () => {
-        const dataURL = stageRef.current.toDataURL();
-        var pdf = new jsPDF({
-            orientation:'landscape',
-            unit:'px',
-            format:'a4'
+    for (const d of data) {
+        var stage = new Konva.Stage({
+            container: 'container',
+            width: 204,
+            height: 324,
         });
-        pdf.addImage(dataURL, 'JPEG', 0, 0, 630, 445); //addImage(image, format, x-coordinate, y-coordinate, width, height)
-        pdf.addPage()
-        pdf.addImage(dataURL, 'JPEG', 0, 0, 630, 445); //addImage(image, format, x-coordinate, y-coordinate, width, height)
-        pdf.save("test.pdf");
 
-    };
-
-    const data = [1, 2, 3, 4, 5, 6]
-
-    const [color, setColor] = useState('green');
-    const [isDragging, setDragging] = useState(false);
-    const [image] = useImage(cardImage);
-    // console.log(image)
+        var backgroundLayer = new Konva.Layer();
+        var imageLayer = new Konva.Layer();
+        var nameLayer = new Konva.Layer();
+        var additionalLayer = new Konva.Layer();
+        var barcodeLayer = new Konva.Layer();
 
 
-    const handleClick = () => {
-        setColor(Konva.Util.getRandomColor());
-        // <Stage width={window.innerWidth} height={window.innerHeight} style={{border:"4px solid black"}}>
-    };
-    return (
-        <>
-
-                <Stage ref={stageRef} width={pageSizes.a4.width} height={pageSizes.a4.height} style={{ border: "4px solid red" }}>
-                    <Layer >
-
-                        {
-                            idCardsData.map((d,i) =>  (
-
-                                    <Image
-                                        key={i}
-                                        image={image}
-                                        // x={0}
-                                        width={203}
-                                        height={323}
-                                        draggable={true}
-                                    />
-                                )
-                            )
-                        }
-
-                        {/* <Image
-                            image={image}
-                            x={17}
-                            y={48}
-                            width={204}
-                            height={323.52}
-                        draggable={true}
-                        /> */}
-
-                        {/* <Image
-                            image={image}
-                            x={238}
-                            y={48}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        />
-                        <Image
-                            image={image}
-                            x={459}
-                            y={48}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        />
-                        <Image
-                            image={image}
-                            x={680}
-                            y={48}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        />
-                        <Image
-                            image={image}
-                            x={901}
-                            y={48}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        />
-                        <Image
-                            image={image}
-                            x={17}
-                            y={419.52}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        />
-
-                        <Image
-                            image={image}
-                            x={238}
-                            y={419.52}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        />
-                        <Image
-                            image={image}
-                            x={459}
-                            y={419.52}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        />
-                        <Image
-                            image={image}
-                            x={680}
-                            y={419.52}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        />
-                        <Image
-                            image={image}
-                            x={901}
-                            y={419.52}
-                            width={204}
-                            height={323.52}
-                        // draggable={true}
-                        /> */}
-                       
-
-                    </Layer>
-                    <Layer>
-                        <Text
-                            text="Maruf Bin Solaiman"
-                            x={50}
-                            y={370}
-                            fontSize={30}
-                        // draggable={true}
-                        />
-
-                        <Text
-                            text="Udayan Basak"
-                            x={535}
-                            y={370}
-                            // draggable={true}
-                            fontSize={30}
-                        />
-                        <Text
-                            text="Mirza Galib"
-                            x={1020}
-                            y={370}
-                            // draggable={true}
-                            fontSize={30}
-                        />
-                        <Text
-                            text="Rabeya Khatun"
-                            x={1505}
-                            y={370}
-                            // draggable={true}
-                            fontSize={30}
-                        />
+        Konva.Image.fromURL('../Assets/images/imagecard.png', function (backgroundNode) {
+            backgroundNode.setAttrs({
+                x: 0,
+                y: 0,
+                height: 324,
+                width: 204,
+            })
+            backgroundLayer.add(backgroundNode);
+        })
 
 
-                    </Layer>
+        Konva.Image.fromURL(d.photoname, async function (avatar) {
+            avatar.setAttrs({
+                y: 67,
+                x: (stage.width() - 100) / 2,
+                height: 100,
+                width: 100,
+                stroke: '#3B75C4',
+                strokeWidth: 3,
+                cornerRadius: 60
+            });
+            imageLayer.add(avatar);
+        });
 
-                </Stage>
-                <Button onClick={handleExport}>export</Button>
-        </>
-    )
+
+        var nameText = new Konva.Text({
+            x: stage.width() / 2,
+            y: 175,
+            text: `${d.name_en.toLocaleUpperCase()}`,
+            fontSize: 16,
+            fontStyle: 700,
+            width: stage.width() - 20,
+            fontFamily: 'Calibri',
+            fill: 'black',
+            align: 'center'
+        })
+        nameText.offsetX(nameText.width() / 2);
+        nameLayer.add(nameText)
+
+        var additionalText = new Konva.Text({
+            x: stage.width() / 2,
+            y: 210,
+            text: `ID NO          : ${d.stdid}\nVERSION     : ${d.courseleveltitle.toLocaleUpperCase()}\nCLASS          : ${d.grouptitle}\nROLL            : ${d.rollno}\nYEAR            : ${d.academicyear}\nMOBILE       : ${d.contactno}`,
+            fontSize: 12,
+            // fontStyle:700,
+            width: stage.width() - 40,
+            fontFamily: 'Calibri',
+            fill: 'black',
+            align: 'left'
+        })
+        additionalText.offsetX(additionalText.width() / 2);
+        additionalLayer.add(additionalText)
+
+
+        var imageObj = new Image();
+        imageObj.onload = function () {
+            var barcode = new Konva.Image({
+                x: 22,
+                y: 293,
+                image: imageObj,
+                width: 130,
+                height: 20,
+                stroke: 'white',
+                strokeWidth: 4,
+                cornerRadius: 2,
+            });
+
+            // add the shape to the layer
+            barcodeLayer.add(barcode);
+        };
+        imageObj.src = `https://barcodeapi.org/api/BAF${d.stdid}?text=none`;
+
+
+        async function loadImage(imageUrl) {
+            const image = new Image();
+            image.src = imageUrl;
+            await image.decode(); // Wait for image to decode completely
+            return image;
+          }
+          
+
+
+        async function createKonvaImage(imageUrl) {
+            const image = await loadImage(imageUrl);
+            const konvaImage = new Konva.Image({
+              image: image,
+              // Set other Konva image properties here
+            });
+            // Add konvaImage to your Konva stage
+            imageLayer.add(konvaImage)
+            // stage.add(imageLayer);
+        }
+        
+        await  createKonvaImage(`https://barcodeapi.org/api/BAF${d.stdid}?text=none`)
+        
+        
+        stage.add(backgroundLayer)
+        stage.add(imageLayer)
+        stage.add(nameLayer)
+        stage.add(additionalLayer)
+        stage.add(barcodeLayer)
+        console.log(stage.toDataURL())
+    }
+    // const arrayData = data.map(async(d, i) => {
+
+    //     var stage = new Konva.Stage({
+    //         container: 'container',
+    //         width: 204,
+    //         height: 324,
+    //     });
+
+    //     var backgroundLayer = new Konva.Layer();
+    //     var imageLayer = new Konva.Layer();
+    //     var nameLayer = new Konva.Layer();
+    //     var additionalLayer = new Konva.Layer();
+    //     var barcodeLayer = new Konva.Layer();
+
+
+    //     await Konva.Image.fromURL('../Assets/images/imagecard.png', function(backgroundNode) {
+    //         backgroundNode.setAttrs({
+    //             x: 0,
+    //             y: 0,
+    //             height: 324,
+    //             width: 204,
+    //         })
+    //         backgroundLayer.add(backgroundNode);
+    //     })
+
+
+    //     Konva.Image.fromURL(d.photoname, async function (avatar) {
+    //         avatar.setAttrs({
+    //             y: 67,
+    //             x: (stage.width() - 100) / 2,
+    //             height: 100,
+    //             width: 100,
+    //             stroke: '#3B75C4',
+    //             strokeWidth: 3,
+    //             cornerRadius: 60
+    //         });
+    //         imageLayer.add(avatar);
+    //     });
+
+
+    //     var nameText = new Konva.Text({
+    //         x: stage.width() / 2,
+    //         y: 175,
+    //         text: `${d.name_en.toLocaleUpperCase()}`,
+    //         fontSize: 16,
+    //         fontStyle: 700,
+    //         width: stage.width() - 20,
+    //         fontFamily: 'Calibri',
+    //         fill: 'black',
+    //         align: 'center'
+    //     })
+    //     nameText.offsetX(nameText.width() / 2);
+    //     nameLayer.add(nameText)
+
+    //     var additionalText = new Konva.Text({
+    //         x: stage.width() / 2,
+    //         y: 210,
+    //         text: `ID NO          : ${d.stdid}\nVERSION     : ${d.courseleveltitle.toLocaleUpperCase()}\nCLASS          : ${d.grouptitle}\nROLL            : ${d.rollno}\nYEAR            : ${d.academicyear}\nMOBILE       : ${d.contactno}`,
+    //         fontSize: 12,
+    //         // fontStyle:700,
+    //         width: stage.width() - 40,
+    //         fontFamily: 'Calibri',
+    //         fill: 'black',
+    //         align: 'left'
+    //     })
+    //     additionalText.offsetX(additionalText.width() / 2);
+    //     additionalLayer.add(additionalText)
+
+
+    //     var imageObj = new Image();
+    //     imageObj.onload = function () {
+    //         var barcode = new Konva.Image({
+    //             x: 22,
+    //             y: 293,
+    //             image: imageObj,
+    //             width: 130,
+    //             height: 20,
+    //             stroke: 'white',
+    //             strokeWidth: 4,
+    //             cornerRadius: 2,
+    //         });
+
+    //         // add the shape to the layer
+    //         barcodeLayer.add(barcode);
+    //     };
+    //     imageObj.src = `https://barcodeapi.org/api/BAF${d.stdid}?text=none`;
+
+    //     stage.add(backgroundLayer)
+    //     stage.add(imageLayer)
+    //     stage.add(nameLayer)
+    //     stage.add(additionalLayer)
+    //     stage.add(barcodeLayer)
+    //     return stage.toDataURL()
+
+
+
+    //     // var promises = [obj1, obj2].map(function(obj){
+    //     //     return db.query('obj1.id').then(function(results){
+    //     //        obj1.rows = results
+    //     //        return obj1
+    //     //     })
+    //     //   })
+    //     //   Promise.all(promises).then(function(results) {
+    //     //       console.log(results)
+    //     //   })
+
+    // })
+
+
+    // return Promise.all(arrayData).then((result) => {
+    //     console.log('ass', result)
+    //     return result
+    // })
+
 }
 
-export default Konvatest
+export default getIdCardImages

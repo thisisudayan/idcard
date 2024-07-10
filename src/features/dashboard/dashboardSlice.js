@@ -4,7 +4,8 @@ const initialState = {
   modalStatus: false,
   idCards: [],
   pageSize: "PDF",
-  pageFormat: "A4"
+  pageFormat: "A4",
+  idCardImages:[]
 
 };
 
@@ -24,11 +25,14 @@ export const dashboardSlice = createSlice({
     }),
     GetPageFormat: ((state,action) => {
       state.pageFormat = action.payload
+    }),
+    SetIdCardImages:((state,action)=>{
+      state.idCardImages=[...state.idCardImages,action.payload]
     })
   },
 
 });
 
-export const { toggleModal, idCardsData,GetPageFormat,GetPageSize } = dashboardSlice.actions;
+export const { toggleModal, idCardsData,GetPageFormat,GetPageSize,SetIdCardImages } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;
