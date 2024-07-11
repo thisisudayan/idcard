@@ -11,7 +11,7 @@ function App() {
         <div className='flex flex-row gap-4 p-5'>
           {
             [1, 2].map((item, index) => (
-              <div className='w-2/12'>
+              <div key={index} className='w-2/12'>
                 <Link key={index} to={`/dashboard/${item}`}>
                   <img alt='Theme Background' src={`../Assets/images/bg${item}.png`} />
                 </Link>

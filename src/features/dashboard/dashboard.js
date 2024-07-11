@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch} from 'react-redux'
 import { idCardsData } from './dashboardSlice'
 import { Link, useParams } from 'react-router-dom'
 import * as XLSX from 'xlsx'
 
 const Dashboard = () => {
+  const [isData,setIsData] = useState()
   const dispatch = useDispatch()
   const params = useParams()
   const readExcel = (file) => {
@@ -27,6 +28,7 @@ const Dashboard = () => {
 
     })
     promise.then((d) => {
+      setIsData(d)
       dispatch(idCardsData(d))
     })
 
@@ -57,9 +59,9 @@ const Dashboard = () => {
               </div>
               <fieldset>
                 <div className="relative border border-blue-300 text-gray-800 bg-white shadow-lg ">
-                  <select className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
-                    <option disabled>Select page format&hellip;</option>
-                    <option selected value="PDF">PDF</option>
+                  <select defaultValue="PDF" className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
+                    <option disabled value="abc">Select page format&hellip;</option>
+                    <option value="PDF">PDF</option>
                     <option disabled value="PNG">PNG</option>
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">
@@ -71,10 +73,10 @@ const Dashboard = () => {
               </fieldset>
               <fieldset>
                 <div className="relative border border-blue-300 text-gray-800 bg-white shadow-lg">
-                  <label for="frm-whatever" className="sr-only">My field</label>
-                  <select className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
-                    <option disabled>Select page size&hellip;</option>
-                    <option selected value="A4">A4</option>
+                  <label htmlFor="frm-whatever" className="sr-only">My field</label>
+                  <select defaultValue="A4" className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
+                    <option disabled value="abc">Select page size&hellip;</option>
+                    <option  value="A4">A4</option>
                     <option disabled value="A3">A3</option>
                     <option disabled value="A2">A2</option>
                     <option disabled value="A1">A1</option>
@@ -87,7 +89,7 @@ const Dashboard = () => {
                 </div>
               </fieldset>
               <Link to={"/download"}>
-                <button className='bg-sky-600 text-white w-full rounded-sm p-1 uppercase'>Preview</button>
+                <button disabled={isData?false:true} className={`transform transition duration-500 ${isData?'bg-blue-600':'bg-white border border-sky-300'} ${isData?'text-white':'text-sky-500'}  w-full rounded-sm p-1 uppercase `}>Preview</button>
               </Link>
 
             </div>
