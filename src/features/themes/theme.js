@@ -6,15 +6,7 @@ import { useRef } from "react";
 
 export default function Theme() {
 
-    const data = useSelector((state) => state.dashboard.idCards)
-    // const stageRef = useRef()
-    // const dataURL = stageRef?.current?.toDataURL({
-    //     mimeType: "image/jpeg",
-    //     quality: 0,
-    //     pixelRatio: 2
-    //   });
-    //   console.log(dataURL)
-    
+    const data = useSelector((state) => state.dashboard.idCards)    
 
     return (
         <div style={{ display: 'flex', width: 1122.24, flexWrap: 'wrap' }}> {/* page er size onujayi etar size hobe. dynamecilaay + felx */}
