@@ -2,254 +2,256 @@ import Konva from "konva";
 import { Layer, Stage, Text } from "react-konva";
 import URLImage from "./urlImage";
 import "./print.css"
+import { useSelector } from "react-redux";
 
 export default function Theme1() {
-    const data = [
-        {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        }, {
-            courseleveltitle: 'Primary(English)',
-            grouptitle: 'XI',
-            rollno: '23',
-            academicyear: '2024',
-            contactno: '1234567890',
-            photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
-            name_en: "maruf bin solaiman siddique",
-            stdid: "4567887654"
-        },
-    ]
+    const data = useSelector((state)=>state.dashboard.idCards)
+    // const data = [
+    //     {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     }, {
+    //         courseleveltitle: 'Primary(English)',
+    //         grouptitle: 'XI',
+    //         rollno: '23',
+    //         academicyear: '2024',
+    //         contactno: '1234567890',
+    //         photoname: "https://firebasestorage.googleapis.com/v0/b/agamilabs-edubd.appspot.com/o/files%2Fstudent%2FEsGaQ_1719903359259.jpg?alt=media&token=8fe4166a-84ac-47ec-a777-de31121d130c",
+    //         name_en: "maruf bin solaiman siddique",
+    //         stdid: "4567887654"
+    //     },
+    // ]
 
     return (
         <div style={{ display: 'flex', width: 1122.24, flexWrap: 'wrap' }}> {/* page er size onujayi etar size hobe. dynamecilaay + felx */}

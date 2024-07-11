@@ -6,18 +6,20 @@ import UploadButton from './UploadButton';
 import Dropdown from './Dropdown';
 import idCardImage from '../Assets/images/imagecard.png'
 import getIdCardImages from './konva';
+import { Link } from "react-router-dom";
 
 const ModalComponent = () => {
 
     const toggleModalStatus = useSelector((state) => state.dashboard.modalStatus)
-    const idCardsData = useSelector((state)=>state.dashboard.idCards)
-    const base64Images = useSelector((state)=>state.dashboard.idCardImage)
+    const idCardsData = useSelector((state) => state.dashboard.idCards)
+    const base64Images = useSelector((state) => state.dashboard.idCardImage)
 
     const dispatch = useDispatch()
 
-    const DownloadPng = async()=>{
+    const DownloadPng = async () => {
         const xyz = await getIdCardImages(idCardsData)
         console.log(xyz)
+
     }
 
     const styles = {
@@ -60,7 +62,9 @@ const ModalComponent = () => {
                                 <UploadButton />
                                 <Dropdown options={['PDF', 'PNG']} />
                                 <Dropdown options={['A4', 'A3', 'A2', 'A1']} />
-                                <Button onClick={()=>DownloadPng()} disabled={!idCardsData.length} sx={{ width: '100%' }} variant="contained">Download</Button>
+                                <Link to="/download">
+                                    <Button onClick={() => DownloadPng()} disabled={!idCardsData.length} sx={{ width: '100%' }} variant="contained">Download</Button>
+                                </Link>
                             </Box>
                         </Grid>
                     </Grid>

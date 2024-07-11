@@ -10,13 +10,18 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import Dashboard from './features/dashboard/dashboard';
+import App from './App';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
+    element: <App />,
   },
+  {
+    path: "/download",
+    element: <Dashboard />
+  }
 ]);
 
 const container = document.getElementById('root');
