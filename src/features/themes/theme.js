@@ -2,11 +2,10 @@ import { Layer, Stage, Text } from "react-konva";
 import URLImage from "./urlImage";
 import "./print.css"
 import { useSelector } from "react-redux"
-import { useRef } from "react";
 
 export default function Theme() {
 
-    const data = useSelector((state) => state.dashboard.idCards)    
+    const data = useSelector((state) => state.dashboard.idCards)
 
     return (
         <div style={{ display: 'flex', width: 1122.24, flexWrap: 'wrap' }}> {/* page er size onujayi etar size hobe. dynamecilaay + felx */}
