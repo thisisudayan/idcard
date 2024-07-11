@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { idCardsData } from './dashboardSlice'
 import { Link, useParams } from 'react-router-dom'
 import * as XLSX from 'xlsx'
@@ -33,21 +33,16 @@ const Dashboard = () => {
   }
   return (
     <>
-      <div className='flex justify-center items-center h-full'>
+      <div className='flex flex-col gap-5 justify-center items-center h-full'>
+        <h1 className='text-2xl'>Updoad your file to generate ID card</h1>
         <div className='flex gap-10'>
           <div className='flex w-3/6 justify-end'>
             <div className='w-4/6'>
-              <img src={`../Assets/images/bg${params.id}.png`} />
+              <img alt='Theme Background' src={`../Assets/images/bg${params.id}.png`} />
             </div>
           </div>
-          {/* <div className='flex flex-1 flex-col w-4/6 gap-4'> */}
-          <div className='flex w-3/6 justify-start'>
+          <div className='flex w-3/6 justify-start items-center'>
             <div className='w-3/6 flex flex-col gap-3'>
-              {/* <input type='file' className='bg-blue-50' onChange={(e) => {
-                const file = e.target.files[0]
-                readExcel(file)
-              }} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" /> */}
-
               <div className="w-full">
                 <label className=" flex flex-col items-center px-1 py-1 transform transition duration-500 bg-white text-sky-500 rounded-sm shadow-lg tracking-wide uppercase border border-blue-300 cursor-pointer hover:bg-sky-500 hover:text-white">
                   <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -62,7 +57,6 @@ const Dashboard = () => {
               </div>
               <fieldset>
                 <div className="relative border border-blue-300 text-gray-800 bg-white shadow-lg ">
-                  {/* <label for="frm-whatever" className="sr-only">My field</label> */}
                   <select className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
                     <option disabled>Select page format&hellip;</option>
                     <option selected value="PDF">PDF</option>

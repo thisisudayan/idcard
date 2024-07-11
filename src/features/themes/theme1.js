@@ -1,20 +1,17 @@
-import Konva from "konva";
 import { Layer, Stage, Text } from "react-konva";
 import URLImage from "./urlImage";
 import "./print.css"
-import { useSelector } from "react-redux";
-import { useRef } from "react";
+import { useSelector } from "react-redux"
 
 export default function Theme1() {
+
     const data = useSelector((state) => state.dashboard.idCards)
-    const stageref = useRef()
-    
 
     return (
         <div style={{ display: 'flex', width: 1122.24, flexWrap: 'wrap' }}> {/* page er size onujayi etar size hobe. dynamecilaay + felx */}
             {
                 data.map((item, index) => (
-                    <Stage width={204} height={324} className="id-card" ref={stageref}>
+                    <Stage width={204} height={324} className="id-card">
                         <Layer>
                             <URLImage src="https://i.ibb.co/VH2y237/imagecard.png" x={0} y={0} width={204} height={324} scale={0.5} />
                         </Layer>
