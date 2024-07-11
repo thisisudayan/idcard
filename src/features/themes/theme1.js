@@ -263,7 +263,7 @@ export default function Theme1() {
                         </Layer>
                         <Layer>
                             <URLImage src={item.photoname} x={52} y={62} width={100} height={100} radius={60} strokeColor="#3B75C4" strokeWidth={3} />
-                            <Text text="Udayan Basak Udayan" fontSize={16} fontStyle="bold" y={175} width={186} align="center" />
+                            <Text text={item.name_en} fontSize={16} fontStyle="bold" y={175} width={185} align="center" />
                             {/* <Text y={210} x={20} align="left" fontFamily="Roboto" text={`ID NO           : ${item.stdid}\nVERSION     : ${item.courseleveltitle}\nCLASS          : ${item.grouptitle}\nROLL            : ${item.rollno}\nYEAR           : ${item.academicyear}\nMOBILE       : ${item.contactno}`} /> */}
                             {/* Text filed and data gula alada layer kore disi alignment er problem ta solve er jonno. uporer line ta comment kore dilam. dorkar na hole fele diyen. */}
                             <Text y={210} x={20} align="left" fontFamily="Roboto" text={`ID NO\nVERSION\nCLASS\nROLL\nYEAR\nMOBILE`} />

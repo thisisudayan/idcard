@@ -17,7 +17,7 @@ function App() {
   return (
     <Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', borderRadius: '10px' }}>
-        <Card sx={{ maxWidth: 450, position: 'relative' }}>
+        <Card sx={{ maxWidth: 250, position: 'relative' }}>
           <CardMedia
             component="img"
             // height="400"
@@ -25,9 +25,9 @@ function App() {
             image={idCard}
             alt="Paella dish"
           />
-          <CardActions sx={{ position: 'absolute', top: '50%', left: '50%' }}>
+          <CardActions sx={{ position: 'absolute', top: '45%', left: '35%' }}>
             <IconButton color="white" aria-label="add to shopping cart" size='large' onClick={() => dispatch(toggleModal(true))} >
-              <AddCircle sx={{ width: 100, height: 100 }} />
+              <AddCircle sx={{ width: 50, height: 50 }} />
             </IconButton>
           </CardActions>
         </Card>

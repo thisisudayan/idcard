@@ -27,8 +27,8 @@ const ModalComponent = () => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        minWidth: 500,
-        maxWidth: 700,
+        // minWidth: 500,
+        maxWidth: 490,
         height: 'auto',
         bgcolor: 'background.paper',
         boxShadow: 24,
@@ -63,7 +63,7 @@ const ModalComponent = () => {
                                 <Dropdown options={['PDF', 'PNG']} />
                                 <Dropdown options={['A4', 'A3', 'A2', 'A1']} />
                                 <Link to="/download">
-                                    <Button onClick={() => DownloadPng()} disabled={!idCardsData.length} sx={{ width: '100%' }} variant="contained">Download</Button>
+                                    <Button onClick={() => DownloadPng()} disabled={!idCardsData.length} sx={{ width: '100%' }} variant="contained">Generate</Button>
                                 </Link>
                             </Box>
                         </Grid>
