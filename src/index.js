@@ -10,7 +10,7 @@ import {
 import "./index.css";
 import Dashboard from './features/dashboard/dashboard';
 import App from './App';
-import Theme1 from './features/themes/theme1';
+import Theme from './features/themes/theme';
 
 
 const router = createBrowserRouter([
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/download",
-    element: <Theme1/>
+    element: <Theme/>
   },
   {
     path:"/dashboard/:id",
