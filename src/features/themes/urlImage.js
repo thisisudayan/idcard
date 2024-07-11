@@ -41,6 +41,9 @@ class URLImage extends React.Component {
           width={this.props.width}
           image={this.state.image}
           scale={this.props.scale}
+          cornerRadius={this.props.radius}
+          stroke={this.props.strokeColor}
+          strokeWidth={this.props.strokeWidth}
           ref={(node) => {
             this.imageNode = node;
           }}
