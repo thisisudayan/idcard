@@ -1,0 +1,5 @@
+@media print {
+    .id-card:nth-child(10n) {
+        page-break-after: always;
+    }
+}
