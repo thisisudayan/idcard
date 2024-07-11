@@ -63,7 +63,7 @@ const ModalComponent = () => {
                                 <Dropdown options={['PDF', 'PNG']} />
                                 <Dropdown options={['A4', 'A3', 'A2', 'A1']} />
                                 <Link to="/download">
-                                    <Button onClick={() => DownloadPng()} disabled={!idCardsData.length} sx={{ width: '100%' }} variant="contained">Generate</Button>
+                                    <Button  sx={{ width: '100%' }} variant="contained">Generate</Button>
                                 </Link>
                             </Box>
                         </Grid>
