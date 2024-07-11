@@ -257,7 +257,7 @@ export default function Theme1() {
         <div style={{ display: 'flex', width: 1122.24, flexWrap: 'wrap' }}> {/* page er size onujayi etar size hobe. dynamecilaay + felx */}
             {
                 data.map((item, index) => (
-                    <div style={{  marginBottom: ( (index+1) % 10 === 0) ? 120 : 20,marginRight:20 }}>
+                    <div style={{  marginBottom: ( (index+1) % 10 === 0) ? 125-index : 20,marginRight:20 }}>
                         <Stage width={204} height={324} key={index} className="id-card">
                             <Layer>
                                 <URLImage src="https://i.ibb.co/VH2y237/imagecard.png" x={0} y={0} width={204} height={324} scale={0.5} />
