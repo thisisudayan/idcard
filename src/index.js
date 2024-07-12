@@ -1,6 +1,6 @@
 import React from 'react';
 import * as ReactDOM from "react-dom/client";
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { store } from './app/store';
 import './index.css';
 import {
@@ -10,8 +10,7 @@ import {
 import "./index.css";
 import Dashboard from './features/dashboard/dashboard';
 import App from './App';
-import Theme from './features/themes/theme';
-
+import Theme1 from './features/themes/theme1';
 
 const router = createBrowserRouter([
   {
@@ -19,12 +18,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/download",
-    element: <Theme/>
+    path: "/download/",
+    element: <Theme1 />
   },
   {
-    path:"/dashboard/:id",
-    element: <Dashboard/>
+    path: "/dashboard/:id",
+    element: <Dashboard />
   }
 ]);
 

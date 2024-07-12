@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch} from 'react-redux'
-import { idCardsData } from './dashboardSlice'
+import { idCardsData,setPageFormat,setPageSize } from './dashboardSlice'
 import { Link, useParams } from 'react-router-dom'
 import * as XLSX from 'xlsx'
 
 const Dashboard = () => {
-  const [isData,setIsData] = useState()
+  const [isData,setIsData] = useState(false)
+
   const dispatch = useDispatch()
   const params = useParams()
+
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
 
@@ -33,6 +35,8 @@ const Dashboard = () => {
     })
 
   }
+
+
   return (
     <>
       <div className='flex flex-col gap-5 justify-center items-center h-full'>
@@ -59,7 +63,7 @@ const Dashboard = () => {
               </div>
               <fieldset>
                 <div className="relative border border-blue-300 text-gray-800 bg-white shadow-lg ">
-                  <select defaultValue="PDF" className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
+                  <select onChange={(e)=>dispatch(setPageFormat(e.target.value))} defaultValue="PDF" className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
                     <option disabled value="abc">Select page format&hellip;</option>
                     <option value="PDF">PDF</option>
                     <option disabled value="PNG">PNG</option>
@@ -74,7 +78,7 @@ const Dashboard = () => {
               <fieldset>
                 <div className="relative border border-blue-300 text-gray-800 bg-white shadow-lg">
                   <label htmlFor="frm-whatever" className="sr-only">My field</label>
-                  <select defaultValue="A4" className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
+                  <select onChange={(e)=>dispatch(setPageSize(e.target.value))} defaultValue="A4" className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
                     <option disabled value="abc">Select page size&hellip;</option>
                     <option  value="A4">A4</option>
                     <option disabled value="A3">A3</option>

@@ -3,7 +3,7 @@ import URLImage from "./urlImage";
 import "./print.css"
 import { useSelector } from "react-redux"
 
-export default function Theme() {
+export default function Theme1() {
 
     const data = useSelector((state) => state.dashboard.idCards)
 
