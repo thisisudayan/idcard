@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  idCards: [],
+  rawExcelDataArray: [],
   pageSize: {
     type:"A4",
     width:1122,
     //height can be used from here if needed.
   },
   pageFormat: "PDF",
-  idCardImages: [],
+  base64Array: [],
   themeName: 1
 
 };
@@ -18,8 +18,8 @@ export const dashboardSlice = createSlice({
   name: 'dashboard',
   initialState,
   reducers: {
-    idCardsData: ((state, action) => {
-      state.idCards = action.payload
+    setRawExcelDataArray: ((state, action) => {
+      state.rawExcelDataArray = action.payload
     }),
     setPageSize: ((state, action) => {
       state.pageSize = action.payload//--
@@ -37,6 +37,6 @@ export const dashboardSlice = createSlice({
 
 });
 
-export const { idCardsData, setPageFormat, setPageSize, SetIdCardImages } = dashboardSlice.actions;
+export const { setRawExcelDataArray, setPageFormat, setPageSize, SetIdCardImages } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

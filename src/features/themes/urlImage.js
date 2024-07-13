@@ -20,6 +20,7 @@ class URLImage extends React.Component {
     loadImage() {
       // save to "this" to remove "load" handler on unmount
       this.image = new window.Image();
+      this.image.crossOrigin = 'Anonymous'
       this.image.src = this.props.src;
       this.image.addEventListener('load', this.handleLoad);
     }

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { idCardsData, setPageFormat, setPageSize } from './dashboardSlice'
-import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { idCardsData, setPageFormat, setPageSize, setRawExcelDataArray } from './dashboardSlice'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import * as XLSX from 'xlsx'
 
 const Dashboard = () => {
-  const [isData, setIsData] = useState(false)
+  const [isRawExcelData, setIsRawExcelData] = useState(false)
+  const reduxExcelData = useSelector((state) => state.dashboard.rawExcelDataArray)
 
   const dispatch = useDispatch()
   const params = useParams()
@@ -30,10 +31,16 @@ const Dashboard = () => {
 
     })
     promise.then((d) => {
-      setIsData(d)
-      dispatch(idCardsData(d))
+      if (d) setIsRawExcelData(true)
+      dispatch(setRawExcelDataArray(d))
+      
+
     })
 
+  }
+
+  const preview = () => {
+    // console.log(reduxExcelData)
   }
 
 
@@ -123,7 +130,7 @@ const Dashboard = () => {
                 </div>
               </fieldset>
               <Link to={`/download/${params.id}`}>
-                <button disabled={isData ? false : true} className={`transform transition duration-500 ${isData ? 'bg-blue-600' : 'bg-white border border-sky-300'} ${isData ? 'text-white' : 'text-sky-500'}  w-full rounded-sm p-1 uppercase `}>Preview</button>
+                <button onClick={preview} disabled={isRawExcelData ? false : true} className={`transform transition duration-500 ${isRawExcelData ? 'bg-blue-600' : 'bg-white border border-sky-300'} ${isRawExcelData ? 'text-white' : 'text-sky-500'}  w-full rounded-sm p-1 uppercase `}>Preview</button>
               </Link>
 
             </div>

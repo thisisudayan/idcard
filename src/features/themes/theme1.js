@@ -2,18 +2,34 @@ import { Layer, Stage, Text } from "react-konva";
 import URLImage from "./urlImage";
 import "./print.css"
 import { useSelector } from "react-redux"
+import { useRef } from "react";
 
 export default function Theme1() {
 
-    const data = useSelector((state) => state.dashboard.idCards)
+    const rawExcelDataArray = useSelector((state) => state.dashboard.rawExcelDataArray)
     const pageSize = useSelector((state)=>state.dashboard.pageSize)
     const width = pageSize.width;
+    const stageRef = useRef(null)
+    const getBase64 = () =>{
+        const dataURI = stageRef.current.toDataURL({pixelRatio:2.7})
+        // console.log(dataURI)
+    }
+    fetch('./data.json')
+    .then(async(response) => {
+        await response.json()
+        console.log("then1")
+    })
+    .then((json) => {
+        console.log(json)
+        console.log("then2")
+    });
+
 
     return (
-        <div style={{ display: 'flex', width: width, flexWrap: 'wrap' }}>
+        <div onClick={getBase64} style={{ display: 'flex', width: width, flexWrap: 'wrap' }}>
             {
-                data.map((item, index) => (
-                    <Stage key={index} width={204} height={324} className="id-card">
+                rawExcelDataArray.map((item, index) => (
+                    <Stage ref={()=>console.log(this)} key={index} width={204} height={324} className="id-card">
                         <Layer>
                             <URLImage src={"../Assets/images/bg1.png"} x={0} y={0} width={204} height={324}  />
                         </Layer>
