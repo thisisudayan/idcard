@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPageFormat, setPageSize, setRawExcelDataArray, setIdCardImages } from './dashboardSlice'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import * as XLSX from 'xlsx'
 import axios from 'axios'
+import generateThemeOne from '../themes/konva'
 
 const Dashboard = () => {
-  const [isRawExcelData, setIsRawExcelData] = useState(false)
   const reduxExcelData = useSelector((state) => state.dashboard.rawExcelDataArray)
   const base64Array = useSelector((state) => state.dashboard.base64Array);
-
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch()
   const params = useParams()
+  const navigator = useNavigate()
 
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
@@ -32,7 +33,6 @@ const Dashboard = () => {
 
     })
     promise.then((d) => {
-      if (d) setIsRawExcelData(true)
       dispatch(setRawExcelDataArray(d))
     })
 
@@ -40,10 +40,14 @@ const Dashboard = () => {
 
 
   const preview = async() => {
+    setLoading(true)
     Promise.all(reduxExcelData.map(async(item, index) => {
+        const pureBase64Canvas = await generateThemeOne(item);
+        const extractBase64Data = pureBase64Canvas.split("base64,")[1];
         const response = await axios.post('https://api.imgbb.com/1/upload?key=bcb5852aaa66f6444c41c7c2ee9a921d', {
-          key: 'bcb5852aaa66f6444c41c7c2ee9a921d',
-          image: "https://random.imagecdn.app/500/150"
+          key: '7384454f3617db9af601d6e0f4ce8be1',
+          image: extractBase64Data,
+          expiration: 120
         },
         {
           headers: {
@@ -52,7 +56,10 @@ const Dashboard = () => {
         });
         dispatch(setIdCardImages(response.data.data.display_url));
     })).then(() => {
-      console.log(base64Array);
+      setLoading(false)
+      if(base64Array.length !== 0) {
+        navigator('/download/'+params.id)
+      }
     })
   }
 
@@ -143,8 +150,9 @@ const Dashboard = () => {
                   </div>
                 </div>
               </fieldset>
-                <button onClick={() => preview()} disabled={isRawExcelData ? false : true} className={`transform transition duration-500 ${isRawExcelData ? 'bg-blue-600' : 'bg-white border border-sky-300'} ${isRawExcelData ? 'text-white' : 'text-sky-500'}  w-full rounded-sm p-1 uppercase `}>Preview</button>
-
+                <div>{`${reduxExcelData.length} Student's data loaded...`}</div>
+                <div>{`${base64Array.length} ID cards generated...`}</div>
+              <button onClick={() => preview()} disabled={reduxExcelData.length === 0 || loading === true} className={`transform transition duration-500 ${(reduxExcelData.length === 0 || loading === true) ? 'bg-white border border-sky-300' : 'bg-blue-600'} ${(reduxExcelData.length === 0 || loading === true) ? 'text-sky-500' : 'text-white'}  w-full rounded-sm p-1 uppercase `}>Generate</button>
             </div>
           </div>
         </div>
