@@ -15,7 +15,7 @@ export default function Theme1() {
                 data.map((item, index) => (
                     <Stage key={index} width={204} height={324} className="id-card">
                         <Layer>
-                            <URLImage src="https://i.ibb.co/VH2y237/imagecard.png" x={0} y={0} width={204} height={324}  />
+                            <URLImage src={"../Assets/images/bg1.png"} x={0} y={0} width={204} height={324}  />
                         </Layer>
                         <Layer>
                             <URLImage src={item.photoname} x={52} y={62} width={100} height={100} radius={60} strokeColor="#3B75C4" strokeWidth={3} />

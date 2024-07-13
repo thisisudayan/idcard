@@ -40,7 +40,7 @@ const Dashboard = () => {
   return (
     <>
       <div className='flex flex-col gap-5 justify-center items-center h-full'>
-        <h1 className='text-2xl'>{params.id == 1 ? "Updoad your file to generate student's ID card" : "Updoad your file to generate teacher's ID card"}</h1>
+        <h1 className='text-2xl'>{params.id === 1 ? "Updoad your file to generate student's ID card" : "Updoad your file to generate teacher's ID card"}</h1>
         <div className='flex gap-10'>
           <div className='flex w-3/6 justify-end'>
             <div className='w-4/6'>
@@ -104,9 +104,8 @@ const Dashboard = () => {
                           width: 1122
                         }))
                         break
-
-                      // default:
-                      //   return
+                      default:
+                        return
                     }
                     console.log(e.target.value)
                   }} defaultValue="A4" className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
