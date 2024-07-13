@@ -7,7 +7,7 @@ import axios from 'axios'
 import generateThemeOne from '../themes/konva'
 
 const Dashboard = () => {
-  const reduxExcelData = useSelector((state) => state.dashboard.rawExcelDataArray)
+  const reduxExcelDataArray = useSelector((state) => state.dashboard.rawExcelDataArray)
   const base64Array = useSelector((state) => state.dashboard.base64Array);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch()
@@ -41,10 +41,10 @@ const Dashboard = () => {
 
   const preview = async() => {
     setLoading(true)
-    Promise.all(reduxExcelData.map(async(item, index) => {
+    Promise.all(reduxExcelDataArray.map(async(item, index) => {
         const pureBase64Canvas = await generateThemeOne(item);
         const extractBase64Data = pureBase64Canvas.split("base64,")[1];
-        const response = await axios.post('https://api.imgbb.com/1/upload?key=bcb5852aaa66f6444c41c7c2ee9a921d', {
+        const response = await axios.post(pureBase64Canvas, {
           key: '7384454f3617db9af601d6e0f4ce8be1',
           image: extractBase64Data,
           expiration: 120
@@ -54,11 +54,17 @@ const Dashboard = () => {
             "Content-Type": "multipart/form-data",
           },
         });
-        dispatch(setIdCardImages(response.data.data.display_url));
+        // dispatch(setIdCardImages(response.data.data.display_url));
+        // console.log(response)
+        // console.log(pureBase64Canvas)
     })).then(() => {
+      console.log("first")
+      navigator('/download/'+params.id)
       setLoading(false)
       if(base64Array.length !== 0) {
+        console.log("navigator")
         navigator('/download/'+params.id)
+        // console.log()
       }
     })
   }
@@ -150,9 +156,9 @@ const Dashboard = () => {
                   </div>
                 </div>
               </fieldset>
-                <div>{`${reduxExcelData.length} Student's data loaded...`}</div>
+                <div>{`${reduxExcelDataArray.length} Student's data loaded...`}</div>
                 <div>{`${base64Array.length} ID cards generated...`}</div>
-              <button onClick={() => preview()} disabled={reduxExcelData.length === 0 || loading === true} className={`transform transition duration-500 ${(reduxExcelData.length === 0 || loading === true) ? 'bg-white border border-sky-300' : 'bg-blue-600'} ${(reduxExcelData.length === 0 || loading === true) ? 'text-sky-500' : 'text-white'}  w-full rounded-sm p-1 uppercase `}>Generate</button>
+              <button onClick={() => preview()} disabled={reduxExcelDataArray.length === 0 || loading === true} className={`transform transition duration-500 ${(reduxExcelDataArray.length === 0 || loading === true) ? 'bg-white border border-sky-300' : 'bg-blue-600'} ${(reduxExcelDataArray.length === 0 || loading === true) ? 'text-sky-500' : 'text-white'}  w-full rounded-sm p-1 uppercase `}>Generate</button>
             </div>
           </div>
         </div>

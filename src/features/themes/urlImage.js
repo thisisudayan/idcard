@@ -35,6 +35,7 @@ class URLImage extends React.Component {
       // this.imageNode.getLayer().batchDraw();
     };
     render() {
+      console.log("Render")
       return (
         <Image
           x={this.props.x}
@@ -48,7 +49,7 @@ class URLImage extends React.Component {
           strokeWidth={this.props.strokeWidth}
           ref={(node) => {
             this.imageNode = node;
-            // console.log(this)
+            console.log(this,node)
           }}
         />
       );
