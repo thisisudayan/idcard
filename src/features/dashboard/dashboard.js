@@ -8,14 +8,13 @@ import axios from 'axios'
 const Dashboard = () => {
   const [isRawExcelData, setIsRawExcelData] = useState(false)
   const reduxExcelData = useSelector((state) => state.dashboard.rawExcelDataArray)
-  const base64Array= useSelector((state) => state.dashboard.base64Array);
+  const base64Array = useSelector((state) => state.dashboard.base64Array);
 
   const dispatch = useDispatch()
   const params = useParams()
 
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
-
       const fileReader = new FileReader()
       fileReader.readAsArrayBuffer(file)
       fileReader.onload = (e) => {
@@ -40,12 +39,29 @@ const Dashboard = () => {
   }
 
 
+  const preview = async() => {
+    Promise.all(reduxExcelData.map(async(item, index) => {
+        const response = await axios.post('https://api.imgbb.com/1/upload?key=bcb5852aaa66f6444c41c7c2ee9a921d', {
+          key: 'bcb5852aaa66f6444c41c7c2ee9a921d',
+          image: "https://random.imagecdn.app/500/150"
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        dispatch(setIdCardImages(response.data.data.display_url));
+    })).then(() => {
+      console.log(base64Array);
+    })
+  }
+
 
 
   return (
     <>
       <div className='flex flex-col gap-5 justify-center items-center h-full'>
-        <h1 className='text-2xl'>{params.id === 1 ? "Updoad your file to generate student's ID card" : "Updoad your file to generate teacher's ID card"}</h1>
+        <h1 className='text-2xl'>{params.id === "1" ? "Updoad your file to generate student's ID card" : "Updoad your file to generate teacher's ID card"}</h1>
         <div className='flex gap-10'>
           <div className='flex w-3/6 justify-end'>
             <div className='w-4/6'>
@@ -127,7 +143,7 @@ const Dashboard = () => {
                   </div>
                 </div>
               </fieldset>
-                <button onClick={preview} disabled={isRawExcelData ? false : true} className={`transform transition duration-500 ${isRawExcelData ? 'bg-blue-600' : 'bg-white border border-sky-300'} ${isRawExcelData ? 'text-white' : 'text-sky-500'}  w-full rounded-sm p-1 uppercase `}>Preview</button>
+                <button onClick={() => preview()} disabled={isRawExcelData ? false : true} className={`transform transition duration-500 ${isRawExcelData ? 'bg-blue-600' : 'bg-white border border-sky-300'} ${isRawExcelData ? 'text-white' : 'text-sky-500'}  w-full rounded-sm p-1 uppercase `}>Preview</button>
 
             </div>
           </div>
