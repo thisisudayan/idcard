@@ -10,7 +10,7 @@ export default function Theme1() {
     const width = pageSize.width;
 
     return (
-        <div style={{ display: 'flex', width: width, flexWrap: 'wrap' }}> {/* page er size onujayi etar size hobe. dynamecilaay + felx */}
+        <div style={{ display: 'flex', width: width, flexWrap: 'wrap' }}>
             {
                 data.map((item, index) => (
                     <Stage key={index} width={204} height={324} className="id-card">
