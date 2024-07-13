@@ -6,9 +6,11 @@ import { useSelector } from "react-redux"
 export default function Theme1() {
 
     const data = useSelector((state) => state.dashboard.idCards)
+    const pageSize = useSelector((state)=>state.dashboard.pageSize)
+    const width = pageSize.width;
 
     return (
-        <div style={{ display: 'flex', width: 1122.24, flexWrap: 'wrap' }}> {/* page er size onujayi etar size hobe. dynamecilaay + felx */}
+        <div style={{ display: 'flex', width: width, flexWrap: 'wrap' }}> {/* page er size onujayi etar size hobe. dynamecilaay + felx */}
             {
                 data.map((item, index) => (
                     <Stage key={index} width={204} height={324} className="id-card">

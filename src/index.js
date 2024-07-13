@@ -11,6 +11,7 @@ import "./index.css";
 import Dashboard from './features/dashboard/dashboard';
 import App from './App';
 import Theme1 from './features/themes/theme1';
+import Theme2 from './features/themes/theme2';
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/download/",
+    path: "/download/1",
     element: <Theme1 />
+  },
+  {
+    path: "/download/2",
+    element: < Theme2/>
   },
   {
     path: "/dashboard/:id",

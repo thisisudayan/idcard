@@ -2,8 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   idCards: [],
-  pageSize: "PDF",
-  pageFormat: "A4",
+  pageSize: {
+    type:"A4",
+    width:1122,
+    //height can be used from here if needed.
+  },
+  pageFormat: "PDF",
   idCardImages: [],
   themeName: 1
 

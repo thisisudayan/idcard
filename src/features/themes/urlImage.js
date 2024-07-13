@@ -7,6 +7,7 @@ class URLImage extends React.Component {
     };
     componentDidMount() {
       this.loadImage();
+      // console.log(this.image)
     }
     componentDidUpdate(oldProps) {
       if (oldProps.src !== this.props.src) {
@@ -46,6 +47,7 @@ class URLImage extends React.Component {
           strokeWidth={this.props.strokeWidth}
           ref={(node) => {
             this.imageNode = node;
+            // console.log(this)
           }}
         />
       );
