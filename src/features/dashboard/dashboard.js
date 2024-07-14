@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import * as XLSX from 'xlsx'
 import axios from 'axios'
 import generateThemeOne from '../themes/konva'
+import generateThemeTwo from '../themes/konva1'
 
 const Dashboard = () => {
   const reduxExcelDataArray = useSelector((state) => state.dashboard.rawExcelDataArray)
@@ -41,29 +42,29 @@ const Dashboard = () => {
 
   const preview = async() => {
     setLoading(true)
-    Promise.all(reduxExcelDataArray.map(async(item, index) => {
-        const pureBase64Canvas = await generateThemeOne(item);
-        const extractBase64Data = pureBase64Canvas.split("base64,")[1];
-        const response = await axios.post(pureBase64Canvas, {
-          key: '7384454f3617db9af601d6e0f4ce8be1',
-          image: extractBase64Data,
-          expiration: 120
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        // dispatch(setIdCardImages(response.data.data.display_url));
-        // console.log(response)
-        // console.log(pureBase64Canvas)
-    })).then(() => {
-      console.log("first")
-      navigator('/download/'+params.id)
+    await Promise.all(reduxExcelDataArray.map(async(item, index) => {
+        const idCardBlob = await generateThemeTwo(item);
+        console.log(URL.createObjectURL(idCardBlob))
+        dispatch(setIdCardImages(index));
+        return URL.createObjectURL(idCardBlob)
+        // const extractBase64Data = pureBase64Canvas.split("base64,")[1];
+        // const response = await axios.post("https://api.imgbb.com/1/upload", {
+        //   key: '2b6dcaf41fa4832f8d0cfe58769998fb',
+        //   image: extractBase64Data,
+        //   expiration: 120
+        // },
+        // {
+        //   headers: {
+        //     "Content-Type": "multipart/form-data",
+        //   },
+        // });
+        // console.log(response.data.data.display_url)
+        // // console.log(pureBase64Canvas)
+    })).then((renderedBlob) => {
       setLoading(false)
-      if(base64Array.length !== 0) {
-        console.log("navigator")
-        navigator('/download/'+params.id)
+      if(renderedBlob.length === reduxExcelDataArray.length) {
+        navigator('/download/'+params.id, { state: renderedBlob })
+        // navigator('/download/'+params.id)
         // console.log()
       }
     })
@@ -158,7 +159,7 @@ const Dashboard = () => {
               </fieldset>
                 <div>{`${reduxExcelDataArray.length} Student's data loaded...`}</div>
                 <div>{`${base64Array.length} ID cards generated...`}</div>
-              <button onClick={() => preview()} disabled={reduxExcelDataArray.length === 0 || loading === true} className={`transform transition duration-500 ${(reduxExcelDataArray.length === 0 || loading === true) ? 'bg-white border border-sky-300' : 'bg-blue-600'} ${(reduxExcelDataArray.length === 0 || loading === true) ? 'text-sky-500' : 'text-white'}  w-full rounded-sm p-1 uppercase `}>Generate</button>
+              <button onClick={async() => await preview()} disabled={reduxExcelDataArray.length === 0 || loading === true} className={`transform transition duration-500 ${(reduxExcelDataArray.length === 0 || loading === true) ? 'bg-white border border-sky-300' : 'bg-blue-600'} ${(reduxExcelDataArray.length === 0 || loading === true) ? 'text-sky-500' : 'text-white'}  w-full rounded-sm p-1 uppercase `}>Generate</button>
             </div>
           </div>
         </div>
