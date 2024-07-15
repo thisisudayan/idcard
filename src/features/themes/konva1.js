@@ -24,24 +24,24 @@ const generateThemeTwo = async (d) => {
         ////////////////////////////////////
         ///////// add background image /////
         ////////////////////////////////////
-        const imageObj = new Image();
-        imageObj.crossOrigin = 'anonymous';
-        imageObj.src = '../Assets/images/bg1.png';
+        const backroundImgObj = new Image();
+        backroundImgObj.crossOrigin = 'anonymous';
+        backroundImgObj.src = '../Assets/images/bg1.png';
 
-        imageObj.onload = () => {
+        backroundImgObj.onload = () => {
             const darthNode = new Konva.Image({
                 x: 0,
                 y: 0,
                 height: 324,
                 width: 204,
-                image: imageObj,
+                image: backroundImgObj,
             });
             backgroundLayer.add(darthNode);
             stage.draw();
             resolve()
         };
 
-        imageObj.onerror = (err) => {
+        backroundImgObj.onerror = (err) => {
             reject();
         };
     });
@@ -51,11 +51,11 @@ const generateThemeTwo = async (d) => {
         ////////////////////////////////////
         ///////// add avatar image /////////
         ////////////////////////////////////
-        const imageObj = new Image();
-        imageObj.crossOrigin = 'anonymous';
-        imageObj.src = d.photoname;
+        const avatarImgObj = new Image();
+        avatarImgObj.crossOrigin = 'anonymous';
+        avatarImgObj.src = d.photoname;
 
-        imageObj.onload = () => {
+        avatarImgObj.onload = () => {
             const darthNode = new Konva.Image({
                 y: 67,
                 x: (stage.width() - 100) / 2,
@@ -64,14 +64,14 @@ const generateThemeTwo = async (d) => {
                 stroke: '#3B75C4',
                 strokeWidth: 3,
                 cornerRadius: 60,
-                image: imageObj,
+                image: avatarImgObj,
             });
             backgroundLayer.add(darthNode);
             stage.draw();
             resolve()
         };
 
-        imageObj.onerror = (err) => {
+        avatarImgObj.onerror = (err) => {
             reject();
         };
     });
@@ -95,7 +95,6 @@ const generateThemeTwo = async (d) => {
         })
         nameText.offsetX(nameText.width() / 2);
         nameLayer.add(nameText)
-        nameLayer.add(nameText);
         resolve()
     })
 
@@ -116,52 +115,52 @@ const generateThemeTwo = async (d) => {
             fill: 'black',
             align: 'left'
         })
-    
+
         additionalText.offsetX(additionalText.width() / 2);
         additionalLayer.add(additionalText)
-        additionalLayer.add(additionalText);
+        resolve()
     })
 
 
     const promise5 = new Promise((resolve, reject) => {
         ////////////////////////////////////
-        ///////// add avatar image /////////
+        ///////// add barcode image /////////
         ////////////////////////////////////
-        const imageObj = new Image();
-        imageObj.crossOrigin = 'anonymous';
-        imageObj.src = `https://barcodeapi.org/api/${d.stdid}?text=none`;
+        const barcodeImgObj = new Image();
+        barcodeImgObj.crossOrigin = 'anonymous';
+        barcodeImgObj.src = `https://barcodeapi.org/api/${d.stdid}?text=none`;
 
-        imageObj.onload = () => {
+        barcodeImgObj.onload = () => {
             const darthNode = new Konva.Image({
-                y: 67,
-                x: (stage.width() - 100) / 2,
-                height: 100,
-                width: 100,
-                stroke: '#3B75C4',
+                x: 22,
+                y: 293,
+                width: 130,
+                height: 20,
+                cornerRadius: 3,
+                strokeColor: "#ffffff",
                 strokeWidth: 3,
-                cornerRadius: 60,
-                image: imageObj,
+                image: barcodeImgObj,
             });
             barcodeLayer.add(darthNode);
             stage.draw();
             resolve()
         };
 
-        imageObj.onerror = (err) => {
+        barcodeImgObj.onerror = (err) => {
             reject();
         };
     });
 
 
-    
 
 
 
 
-    return Promise.all([promise1, promise2, promise3]).then(async() => {
+
+    return Promise.all([promise1, promise2, promise3, promise4, promise5]).then(async () => {
         return stage.toBlob({ pixelRatio: 3 })
-            // .then(blob => resolve(blob))
-            // .catch(err => reject(err));
+        // .then(blob => resolve(blob))
+        // .catch(err => reject(err));
     })
 
 }

@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPageFormat, setPageSize, setRawExcelDataArray, setIdCardImages } from './dashboardSlice'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import * as XLSX from 'xlsx'
-import axios from 'axios'
-import generateThemeOne from '../themes/konva'
 import generateThemeTwo from '../themes/konva1'
+import savetopdf from '../themes/theme1'
 
 const Dashboard = () => {
   const reduxExcelDataArray = useSelector((state) => state.dashboard.rawExcelDataArray)
   const base64Array = useSelector((state) => state.dashboard.base64Array);
   const [loading, setLoading] = useState(false);
+  const [finename, setFilename] = useState("unknown")
   const dispatch = useDispatch()
   const params = useParams()
-  const navigator = useNavigate()
+  const excelInputRef = useRef(null)
 
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
@@ -21,6 +21,7 @@ const Dashboard = () => {
       fileReader.readAsArrayBuffer(file)
       fileReader.onload = (e) => {
         const bufferArray = e.target.result
+        setFilename(file.name);
         const workBook = XLSX.read(bufferArray, { type: 'buffer' })
         const workSheetName = workBook.SheetNames[0]
         const workSheet = workBook.Sheets[workSheetName]
@@ -44,29 +45,18 @@ const Dashboard = () => {
     setLoading(true)
     await Promise.all(reduxExcelDataArray.map(async(item, index) => {
         const idCardBlob = await generateThemeTwo(item);
-        console.log(URL.createObjectURL(idCardBlob))
         dispatch(setIdCardImages(index));
         return URL.createObjectURL(idCardBlob)
-        // const extractBase64Data = pureBase64Canvas.split("base64,")[1];
-        // const response = await axios.post("https://api.imgbb.com/1/upload", {
-        //   key: '2b6dcaf41fa4832f8d0cfe58769998fb',
-        //   image: extractBase64Data,
-        //   expiration: 120
-        // },
-        // {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data",
-        //   },
-        // });
-        // console.log(response.data.data.display_url)
-        // // console.log(pureBase64Canvas)
     })).then((renderedBlob) => {
       setLoading(false)
       if(renderedBlob.length === reduxExcelDataArray.length) {
-        navigator('/download/'+params.id, { state: renderedBlob })
-        // navigator('/download/'+params.id)
-        // console.log()
+        savetopdf(finename, renderedBlob, 1122, 796);
+
       }
+    }).then(()=>{
+      excelInputRef.current.value = null;
+      dispatch(setRawExcelDataArray([]))
+      dispatch(setIdCardImages(-1))
     })
   }
 
@@ -90,7 +80,7 @@ const Dashboard = () => {
                     <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                   </svg>
                   <span className="text-base leading-normal">Upload</span>
-                  <input type='file' className="hidden" onChange={(e) => {
+                  <input type='file' className="hidden" ref={excelInputRef} onChange={(e) => {
                     const file = e.target.files[0]
                     readExcel(file)
                   }} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
@@ -118,31 +108,34 @@ const Dashboard = () => {
                       case "A1":
                         dispatch(setPageSize({
                           type: e.target.value,
-                          width: 3178
+                          width: 3178,
+                          height:796,
                         }))
                         break
                       case "A2":
                         dispatch(setPageSize({
                           type: e.target.value,
-                          width: 2245
+                          width: 2245,
+                          height:796,
                         }))
                         break
                       case "A3":
                         dispatch(setPageSize({
                           type: e.target.value,
-                          width: 1585
+                          width: 1585,
+                          height:796,
                         }))
                         break
                       case "A4":
                         dispatch(setPageSize({
                           type: e.target.value,
-                          width: 1122
+                          width: 1122,
+                          height:796,
                         }))
                         break
                       default:
                         return
                     }
-                    console.log(e.target.value)
                   }} defaultValue="A4" className="appearance-none w-full py-1 px-2 bg-white text-center outline-none">
                     <option disabled value="abc">Select page size&hellip;</option>
                     <option value="A4">A4</option>

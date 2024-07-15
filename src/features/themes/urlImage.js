@@ -7,7 +7,6 @@ class URLImage extends React.Component {
     };
     componentDidMount() {
       this.loadImage();
-      // console.log(this.image)
     }
     componentDidUpdate(oldProps) {
       if (oldProps.src !== this.props.src) {
@@ -35,7 +34,6 @@ class URLImage extends React.Component {
       // this.imageNode.getLayer().batchDraw();
     };
     render() {
-      // console.log("Render")
       return (
         <Image
           x={this.props.x}
@@ -50,7 +48,6 @@ class URLImage extends React.Component {
           draggable={true}
           ref={(node) => {
             this.imageNode = node;
-            // console.log(this,node)
           }}
         />
       );
