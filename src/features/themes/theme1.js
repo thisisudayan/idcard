@@ -15,11 +15,11 @@ import jsPDF from 'jspdf';
               324
             );
             x+=204
-            if((index+1)%10==0){
+            if((index+1)%10===0){
                 pdf.addPage()
                 x=0
                 y=0
-            }else if((index+1)%5==0){
+            }else if((index+1)%5===0){
                 y+=324
                 x=0
             }
