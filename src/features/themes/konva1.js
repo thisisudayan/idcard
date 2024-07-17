@@ -53,7 +53,7 @@ const generateThemeTwo = async (d) => {
         ////////////////////////////////////
         const avatarImgObj = new Image();
         avatarImgObj.crossOrigin = 'anonymous';
-        avatarImgObj.src = d.photoname;
+        avatarImgObj.src = d.photoname ? d.photoname : '../Assets/images/default.jpg';
 
         avatarImgObj.onload = () => {
             const darthNode = new Konva.Image({
