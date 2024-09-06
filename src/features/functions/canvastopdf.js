@@ -1,5 +1,5 @@
 import jsPDF from 'jspdf';
-    const savetopdf = (pdfName = "idcards", idCardBolbUrls, height, width) =>{
+    const canvasToPDF = (pdfName = "idcards", idCardBolbUrls, height, width) =>{
         var pdf = new jsPDF('l', 'px', [width,height]);
         pdf.setTextColor('#000000');
         let x = 0;
@@ -27,4 +27,4 @@ import jsPDF from 'jspdf';
         pdf.save(pdfName+'.pdf');
     }
 
-    export default savetopdf;
+    export default canvasToPDF;

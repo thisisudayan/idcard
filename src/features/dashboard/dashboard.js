@@ -1,59 +1,67 @@
 import React, { useRef, useState } from 'react'
+// import * as XLSX from 'xlsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPageFormat, setPageSize, setRawExcelDataArray, setIdCardImages } from './dashboardSlice'
 import { useParams } from 'react-router-dom'
-import * as XLSX from 'xlsx'
-import generateThemeTwo from '../themes/konva1'
-import savetopdf from '../themes/theme1'
+import generateThemeOne from '../themes/themeOne.js'
+import canvasToPDF from '../functions/canvastopdf.js'
+import readExcel from '../functions/readexcel.js'
 
 const Dashboard = () => {
   const reduxExcelDataArray = useSelector((state) => state.dashboard.rawExcelDataArray)
-  const base64Array = useSelector((state) => state.dashboard.base64Array);
-  const [loading, setLoading] = useState(false);
-  const [finename, setFilename] = useState("unknown")
+  const base64Array = useSelector((state) => state.dashboard.base64Array)
+  const [loading, setLoading] = useState(false)
+  const [fileName, setFileName] = useState("unknown")
+  // const [file, setFile] = useState(null)
   const dispatch = useDispatch()
   const params = useParams()
   const excelInputRef = useRef(null)
 
-  const readExcel = (file) => {
-    const promise = new Promise((resolve, reject) => {
-      const fileReader = new FileReader()
-      fileReader.readAsArrayBuffer(file)
-      fileReader.onload = (e) => {
-        const bufferArray = e.target.result
-        setFilename(file.name);
-        const workBook = XLSX.read(bufferArray, { type: 'buffer' })
-        const workSheetName = workBook.SheetNames[0]
-        const workSheet = workBook.Sheets[workSheetName]
-        const data = XLSX.utils.sheet_to_json(workSheet)
-        resolve(data)
+  // const readExcel = (file) => {
+  //   const promise = new Promise((resolve, reject) => {
+  //     const fileReader = new FileReader()
+  //     fileReader.readAsArrayBuffer(file)
+  //     fileReader.onload = (e) => {
+  //       const bufferArray = e.target.result
+  //       setFileName(file.name);
+  //       const workBook = XLSX.read(bufferArray, { type: 'buffer' })
+  //       const workSheetName = workBook.SheetNames[0]
+  //       const workSheet = workBook.Sheets[workSheetName]
+  //       const data = XLSX.utils.sheet_to_json(workSheet)
+  //       resolve(data)
 
-      }
-      fileReader.onerror = ((error) => {
-        reject(error)
-      })
+  //     }
+  //     fileReader.onerror = ((error) => {
+  //       reject(error)
+  //     })
 
-    })
-    promise.then((d) => {
-      dispatch(setRawExcelDataArray(d))
-    })
+  //   })
+  //   promise.then((d) => {
+  //     dispatch(setRawExcelDataArray(d))
+  //   })
 
+  // }
+
+  const test = () => {
+    const { fileName, data } = readExcel(excelInputRef.current.value[0])
+    setFileName(fileName)
+    dispatch(setRawExcelDataArray(data))
   }
 
 
-  const preview = async() => {
+  const preview = async () => {
     setLoading(true)
-    await Promise.all(reduxExcelDataArray.map(async(item, index) => {
-        const idCardBlob = await generateThemeTwo(item);
-        dispatch(setIdCardImages(index));
-        return URL.createObjectURL(idCardBlob)
+    await Promise.all(reduxExcelDataArray.map(async (item, index) => {
+      const idCardBlob = await generateThemeOne(item);
+      dispatch(setIdCardImages(index));
+      return URL.createObjectURL(idCardBlob)
     })).then((renderedBlob) => {
       setLoading(false)
-      if(renderedBlob.length === reduxExcelDataArray.length) {
-        savetopdf(finename, renderedBlob, 1122, 796);
+      if (renderedBlob.length === reduxExcelDataArray.length) {
+        canvasToPDF(fileName, renderedBlob, 1122, 796);
 
       }
-    }).then(()=>{
+    }).then(() => {
       excelInputRef.current.value = null;
       dispatch(setRawExcelDataArray([]))
       dispatch(setIdCardImages(-1))
@@ -81,8 +89,10 @@ const Dashboard = () => {
                   </svg>
                   <span className="text-base leading-normal">Upload</span>
                   <input type='file' className="hidden" ref={excelInputRef} onChange={(e) => {
-                    const file = e.target.files[0]
-                    readExcel(file)
+                    // const fileTarget = e.target.files[0]
+                    // setFile(fileTarget)
+                    // readExcel(file)
+                    test()
                   }} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
                 </label>
               </div>
@@ -109,28 +119,28 @@ const Dashboard = () => {
                         dispatch(setPageSize({
                           type: e.target.value,
                           width: 3178,
-                          height:796,
+                          height: 796,
                         }))
                         break
                       case "A2":
                         dispatch(setPageSize({
                           type: e.target.value,
                           width: 2245,
-                          height:796,
+                          height: 796,
                         }))
                         break
                       case "A3":
                         dispatch(setPageSize({
                           type: e.target.value,
                           width: 1585,
-                          height:796,
+                          height: 796,
                         }))
                         break
                       case "A4":
                         dispatch(setPageSize({
                           type: e.target.value,
                           width: 1122,
-                          height:796,
+                          height: 796,
                         }))
                         break
                       default:
@@ -150,9 +160,9 @@ const Dashboard = () => {
                   </div>
                 </div>
               </fieldset>
-                <div>{`${reduxExcelDataArray.length} Student's data loaded...`}</div>
-                <div>{`${base64Array.length} ID cards generated...`}</div>
-              <button onClick={async() => await preview()} disabled={reduxExcelDataArray.length === 0 || loading === true} className={`transform transition duration-500 ${(reduxExcelDataArray.length === 0 || loading === true) ? 'bg-white border border-sky-300' : 'bg-blue-600'} ${(reduxExcelDataArray.length === 0 || loading === true) ? 'text-sky-500' : 'text-white'}  w-full rounded-sm p-1 uppercase `}>Generate</button>
+              <div>{`${reduxExcelDataArray.length} Student's data loaded...`}</div>
+              <div>{`${base64Array.length} ID cards generated...`}</div>
+              <button onClick={async () => await preview()} disabled={reduxExcelDataArray.length === 0 || loading === true} className={`transform transition duration-500 ${(reduxExcelDataArray.length === 0 || loading === true) ? 'bg-white border border-sky-300' : 'bg-blue-600'} ${(reduxExcelDataArray.length === 0 || loading === true) ? 'text-sky-500' : 'text-white'}  w-full rounded-sm p-1 uppercase `}>Generate</button>
             </div>
           </div>
         </div>

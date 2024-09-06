@@ -27,10 +27,10 @@ export const dashboardSlice = createSlice({
       }
     }),
     setPageSize: ((state, action) => {
-      state.pageSize = action.payload//--
+      state.pageSize = action.payload
     }),
     setPageFormat: ((state, action) => {
-      state.pageFormat = action.payload//--
+      state.pageFormat = action.payload
     }),
     setIdCardImages: ((state, action) => {
       if (action.payload === -1) {
@@ -46,6 +46,11 @@ export const dashboardSlice = createSlice({
 
 });
 
-export const { setRawExcelDataArray, setPageFormat, setPageSize, setIdCardImages } = dashboardSlice.actions;
+export const {
+  setRawExcelDataArray,
+  setPageFormat,
+  setPageSize,
+  setIdCardImages
+} = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

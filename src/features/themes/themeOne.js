@@ -1,6 +1,6 @@
 import Konva from 'konva';
 
-const generateThemeTwo = async (d) => {
+const generateThemeOne = async (d) => {
     const stage = new Konva.Stage({
         container: 'container',
         width: 204,
@@ -84,10 +84,8 @@ const generateThemeTwo = async (d) => {
             x: stage.width() / 2,
             y: 158,
             text: `${d.name_en.toLocaleUpperCase()}`,
-            text: `${d.name_en}`,
             fontSize: 16,
-            fontStyle: 700,
-            fontStyle: 'bold',
+            fontStyle: 700||'bold',
             width: stage.width(),
             fontFamily: 'Roboto Condensed',
             fill: 'black',
@@ -189,6 +187,6 @@ const generateThemeTwo = async (d) => {
 
 }
 
-export default generateThemeTwo;
+export default generateThemeOne;
 
 
